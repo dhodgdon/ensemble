@@ -1,0 +1,5 @@
+*.txt
+archive
+build
+__pycache__
+___*
