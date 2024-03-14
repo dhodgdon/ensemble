@@ -11,7 +11,7 @@ class MusicInterpreter:
         self.ensemble_song = ast
 
         self.streamer.insert(0, tempo.MetronomeMark(number=self.ensemble_song['Tempo']))
-        self.streamer.append(meter.TimeSignature(f'{self.ensemble_song['Time Signature'][0]}/{self.ensemble_song['Time Signature'][1]}'))
+        self.streamer.append(meter.TimeSignature(f"{self.ensemble_song['Time Signature'][0]}/{self.ensemble_song['Time Signature'][1]}"))
         
         for line in self.ensemble_song['lines'].values():
             p = stream.Part()
@@ -28,4 +28,4 @@ class MusicInterpreter:
             self.streamer.insert(0, part)
         
         print(f"Now playing {self.ensemble_song['Title']} ...")
-        self.streamer.show('midi')
+        self.streamer.show("midi")

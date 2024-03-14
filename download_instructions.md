@@ -39,6 +39,6 @@ ___
 5. Clone this repo onto your machine by running `git clone https://github.com/dhodgdon/ensemble.git`.
 6. Run `cd ensemble` to change directories to the top-level directory of Ensemble.
 7. Run `pip install .`.
-8. You may receive some warnings about scripts being installed in a folder names something like `/home/<username>/.local/bin`. If you do, run `export PATH=/home/<username>/.local/bin` with your username substituted.
+8. You may receive some warnings about scripts being installed in a folder names something like `/home/<username>/.local/bin`. If you do, run `export PATH=/home/<username>/.local/bin:$PATH` with your username substituted.
 
 You can now create a Ensemble file with the .ens extension and run `ensemble <your_file_name>.ens` from the console!
