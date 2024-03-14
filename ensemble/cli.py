@@ -21,9 +21,7 @@ def run_ensemble_file(file_path):
 
         # Initialize interpreter and execute the code
         interpreter = MusicInterpreter()
-        result = interpreter.interpret(ast)
-
-        # print("Execution result:", result)
+        interpreter.interpret(ast)
 
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
