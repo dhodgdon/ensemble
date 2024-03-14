@@ -40,5 +40,18 @@ ___
 6. Run `cd ensemble` to change directories to the top-level directory of Ensemble.
 7. Run `pip install .`.
 8. You may receive some warnings about scripts being installed in a folder names something like `/home/<username>/.local/bin`. If you do, run `export PATH=/home/<username>/.local/bin:$PATH` with your username substituted.
+9. Run `sudo apt-get install timidity`. Then copy the code below and run it in a Python script (any file with the file extension ".py") or in the Python REPL by typing `python3` in the command line.
 
-You can now create a Ensemble file with the .ens extension and run `ensemble <your_file_name>.ens` from the console!
+    ```python
+    import music21
+
+    # Replace '/path/to/application' with the actual path to your MIDI application. Mine was located at '/usr/bin/timidity'. You can run 'which timidity' to find its path. 
+    midi_application_path = '/path/to/application'
+    music21.environment.set('midiPath', midi_application_path)
+    ```
+___
+
+# Conclusion
+You can now create a Ensemble file with the .ens extension and run `ensemble <your_file_name>.ens` from the console! 
+
+Change directories into /ensemble/examples by running `cd examples` when in your ensemble top-level directory, and try running some of the example Ensemble programs there.
