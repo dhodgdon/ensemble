@@ -1,32 +1,31 @@
 from music21 import *
 
-class Interpreter:
+class MusicInterpreter:
 
     def __init__(self) -> None:
-        pass
+        self.ensemble_song = {}
+        self.streamer = stream.Stream()
+        self.parts = []
 
-    def interpret(self, ast) -> None:
-        music_stream = stream.Stream()
+    def interpret(self, ast):
+        self.ensemble_song = ast
 
-        for curr_chord in ast:
-            # Currently working:
-            curr_chord = [x for x in curr_chord if x not in ['-', '--', '~', '~~']]
-            # print(curr_chord)
-
-            # Not yet working:
-            # curr_chord = [x for x in curr_chord if x not in ['-', '--']]
-            # # hold_indices = [index for index, value in enumerate(curr_chord) if value in ['~', '~~']]
-            # # print(hold_indices)
-            # i = -1
-            # hold_length = 1.0
-            # if len(music_stream) > 1 and music_stream[i] in ['~', '~~']:
-            #     while music_stream[i] in ['~', '~~']:
-            #         i -= 1
-            #         hold_length += 1.0
-
-            #     music_stream[i].duration.quarterLength = hold_length
-
-            music_stream.append(chord.Chord(curr_chord))
-
-        print(music_stream[-1])
-        music_stream.show('midi')
+        self.streamer.insert(0, tempo.MetronomeMark(number=self.ensemble_song['Tempo']))
+        self.streamer.append(meter.TimeSignature(f'{self.ensemble_song['Time Signature'][0]}/{self.ensemble_song['Time Signature'][1]}'))
+        
+        for line in self.ensemble_song['lines'].values():
+            p = stream.Part()
+            for n in line:
+                if n[0] == '-' or n[0] == '--':
+                    temp = note.Rest()
+                else:
+                    temp = note.Note(n[0])
+                temp.duration.quarterLength = n[1]
+                p.append(temp)
+            self.parts.append(p)
+        
+        for part in self.parts:
+            self.streamer.insert(0, part)
+        
+        print(f"Now playing {self.ensemble_song['Title']} ...")
+        self.streamer.show('midi')

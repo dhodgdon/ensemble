@@ -15,7 +15,7 @@ setup(
     ],
     author='Dallin Hodgdon',
     author_email='dhodgdon7@gmail.com',
-    description='Ensemble Language - The musical programming language implemented in Python',
+    description='Ensemble Language - The musical programming language',
     url='https://github.com/dhodgdon/ensemble',
     license='MIT',
 )

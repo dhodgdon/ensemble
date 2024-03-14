@@ -3,3 +3,5 @@ archive
 build
 __pycache__
 ___*
+*.egg-info
+configure*

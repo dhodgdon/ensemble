@@ -1,7 +1,7 @@
 import sys
 from .ens_lexer import MusicLexer
 from .ens_parser import MusicParser
-from .ens_interpreter import Interpreter
+from .ens_interpreter import MusicInterpreter
 
 def run_ensemble_file(file_path):
     try:
@@ -20,7 +20,7 @@ def run_ensemble_file(file_path):
         ast = parser.parse(tokens)
 
         # Initialize interpreter and execute the code
-        interpreter = Interpreter()
+        interpreter = MusicInterpreter()
         result = interpreter.interpret(ast)
 
         # print("Execution result:", result)
