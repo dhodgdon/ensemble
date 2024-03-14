@@ -6,7 +6,7 @@ Note: These instructions are not complete yet.
 
 [MacOS](#macos-installation)
 
-[Linux/Unix](#linuxunix-installation)
+[Debian/Ubuntu Linux](#linuxunix-installation)
 
 
 ___
@@ -30,7 +30,7 @@ y.
 
 
 ___
-### Linux/UNIX Installation:
+### Debian/Ubuntu Linux Installation:
 ___
 1. According to the Python documentation, "Python comes preinstalled on most Linux distributions, and is available as a package on all others" (see https://docs.python.org/3/using/unix.html). Confirm Python is installed by running `python3 --version` in your terminal. If not installed, follow these directions: https://www.python.org/downloads/source/
 2. Confirm Python is added to your PATH by running `echo $PATH | grep Python`. If not added to the path, follow the instructions here: https://realpython.com/add-python-to-path/#how-to-add-python-to-path-on-linux-and-macos
