@@ -12,8 +12,9 @@ class MusicParser(Parser):
         self.ensemble_song = {}
         self.ts_numerator = 0
         self.ts_denominator = 0
+        self.transpose_amount = 0
 
-    @_('title tempo time_signature line')
+    @_('title tempo time_signature opt_transpose line')
     def song(self, p):
         self.ensemble_song["lines"] = {f"line{self.part_no}" : p.line}
         self.part_no += 1
@@ -53,6 +54,32 @@ class MusicParser(Parser):
         self.note_length = 4.0 / self.ts_denominator
         self.ensemble_song[p.TIME_SIGNATURE] = (self.ts_numerator, self.ts_denominator)
 
+
+    @_('empty')
+    def opt_transpose(self, p):
+        return p.empty
+
+    @_('transpose')
+    def opt_transpose(self, p):
+        return p.transpose
+
+    @_('TRANSPOSE COLON TR_NUM') # FIX THIS FUNCTION
+    def transpose(self, p):
+        if p.TR_NUM[0] == "+":
+            inted = int(p.TR_NUM[1:])
+        else:
+            inted = int(p.TR_NUM)
+
+        self.transpose_amount = inted
+        self.ensemble_song[p.TRANSPOSE] = inted
+
+        # self.transpose_amount = int(p.TR_NUM[1:])
+        # self.ensemble_song[p.TRANSPOSE] = int(p.TR_NUM[1:])
+
+    @_('')
+    def empty(self, p):
+        pass
+
     @_('NOTE')
     def note_rest(self, p):
         return (p.NOTE, self.note_length)
@@ -60,6 +87,12 @@ class MusicParser(Parser):
     @_('REST')
     def note_rest(self, p):
         return (p.REST, self.note_length)
+    
+    # ----------------------------------------
+    @_('note_rest FRACTION')
+    def note_rest(self, p):
+        return (p.note_rest[0], p.note_rest[1] / int(p.FRACTION[1:]))
+    # ----------------------------------------
 
     # These are the first two notes of the line.
     @_('note_rest COMMA note_rest')

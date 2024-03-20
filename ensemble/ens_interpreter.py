@@ -26,6 +26,10 @@ class MusicInterpreter:
         
         for part in self.parts:
             self.streamer.insert(0, part)
+            
+        if 'Transpose' in self.ensemble_song.keys():
+            for n in self.streamer.recurse().notes:
+                n.transpose(self.ensemble_song['Transpose'], inPlace=True)
         
         print(f"Now playing {self.ensemble_song['Title']} ...")
         self.streamer.show("midi")
