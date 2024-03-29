@@ -39,7 +39,8 @@ class MusicLexer(Lexer):
     FRACTION = r'\/\d+'
 
     # FIX THESE NUMBERS TO ALL MATCH AND THEN DO RANGE CHECKING IN PARSER?
-    TS_NUM = r'(1[0-2]|[2-9])\/(1[0-2]|[2-9])'
+    TS_NUM = r'(2[0-1]|1[0-9]|[2-9])\/(3[0-2]|[1-2][0-9]|[2-9])'
+    # TS_NUM = r'(1[0-2]|[2-9])\/(1[0-2]|[2-9])'
     TEMPO_NUM = r'\b(?:[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-3][0-9]|240)\b'
     TR_NUM = r'(?:\+|-)(?:50|[0-4]?[0-9])'
 
