@@ -55,7 +55,7 @@ class MusicLexer(Lexer):
     # Ignore whitespace
     ignore = ' \t\f\r\v'
 
-    ignore_comment = r'\!.*'
+    ignore_comment = r'\#.*'
 
     def error(self, t):
         raise ValueError(f"Illegal character '{t.value[0]}' at line {t.lineno}")
