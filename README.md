@@ -6,7 +6,7 @@ Ensemble uses [scientific pitch notation](https://www.musicandtheory.com/an-easy
 
 
 ## Usage
-
+ 
 Ensemble files have the following characteristics (Note: This order must be followed.): 
 * `Title`
 * `Tempo`
@@ -170,7 +170,7 @@ ___
 4. Ensure `git` is installed on your computer by running `git version` in the terminal. If not, follow these instructions: 
 
     [Install git](https://github.com/git-guides/install-git#debianubuntu)
-    
+
 5. Change folders to the folder where you would like to download Ensemble; then, clone this repo onto your machine by running `git clone https://github.com/dhodgdon/ensemble.git`.
 6. Run `cd ensemble` to change directories to the top-level directory of Ensemble.
 7. Run `pip install .`.
