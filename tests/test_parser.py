@@ -1,3 +1,5 @@
+# AI assisted in the creation of this code.
+
 import unittest
 from ensemble.ens_parser import MusicParser
 

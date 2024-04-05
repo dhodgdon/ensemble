@@ -1,3 +1,5 @@
+# AI assisted in the creation of this code.
+
 from sly import Parser
 from .ens_lexer import MusicLexer
 from functools import reduce

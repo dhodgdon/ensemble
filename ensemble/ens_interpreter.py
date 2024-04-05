@@ -1,3 +1,5 @@
+# AI assisted in the creation of this code.
+
 from music21 import *
 
 class MusicInterpreter:

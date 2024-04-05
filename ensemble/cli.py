@@ -1,3 +1,5 @@
+# AI assisted in the creation of this code.
+
 import sys
 from .ens_lexer import MusicLexer
 from .ens_parser import MusicParser
