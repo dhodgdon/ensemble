@@ -3,6 +3,7 @@
 from sly import Parser
 from .ens_lexer import MusicLexer
 from functools import reduce
+import math
 
 class MusicParser(Parser):
     tokens = MusicLexer.tokens
@@ -144,8 +145,8 @@ class MusicParser(Parser):
         if total_notes_length % (self.ts_numerator / (self.ts_denominator / 4.0)) == 0:
             return True
         else:
-            # return False
-            raise ValueError(f"Number of notes per measure must match time signature.")
+            incorrect_measure = math.ceil(total_notes_length / (self.ts_numerator / (self.ts_denominator / 4.0)))
+            raise ValueError(f"Incorrect number of beats in measure {incorrect_measure}. Number of beats per measure must match time signature.")
 
 
     #######################################
