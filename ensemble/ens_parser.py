@@ -24,7 +24,8 @@ class MusicParser(Parser):
 
     @_('OPEN_BR notes CLOSE_BR')
     def line(self, p):
-        return p.notes
+        if self.has_correct_length(p):
+            return p.notes
 
     @_('song line')
     def song(self, p):
@@ -116,30 +117,36 @@ class MusicParser(Parser):
     def notes(self, p):
         p.notes[-1] = (p.notes[-1][0], p.notes[-1][1] + self.note_length)
         return p.notes
-
+    
     @_('notes BAR note_rest', 'notes BAR HOLD')
     def notes(self, p):
-        total_notes_length = reduce(lambda x, y: x + y[1], p.notes, 0)
-        
-        # Below, we calculate how if the length of each measure is correct according 
-        # to our specified time signature. We first divide the denominator of the time
-        # signature by 4.0 to determine how many of each note will make up a quarter 
-        # note. For instance, with 9/12 time 12/4.0 = 3, so it takes 3 notes to make a 
-        # quarter note beat. We then divide the numerator by this number to determine
-        # how many quarter notes should be in each measure. Again using the 9/12 time 
-        # signature example, this would give us 9/3 = 3, which is correct. Finally, we
-        # modularly divide the length of all the notes in this line of music by that 
-        # number to confirm that each measure is indeed the correct length. Because we
-        # perform this calculation at each measure, all the measures will have the
-        # correct length.
-        if total_notes_length % (self.ts_numerator / (self.ts_denominator / 4.0)) == 0:
+        if self.has_correct_length(p):
             if p[2] == '~' or p[2] == '~~':
                 p.notes[-1] = (p.notes[-1][0], p.notes[-1][1] + self.note_length)
             else:
                 p.notes.append(p[2])
             return p.notes
+        
+    def has_correct_length(self, p):
+        total_notes_length = reduce(lambda x, y: x + y[1], p.notes, 0)
+        
+        # Below, we calculate if the length of each measure is correct according to our 
+        # specified time signature. We first divide the denominator of the time 
+        # signature by 4.0 to determine how many of each note will make up a quarter 
+        # note. For instance, with 9/12 time 12/4.0 = 3, so it takes 3 notes to make a 
+        # quarter note beat. We then divide the numerator by this number to determine 
+        # how many quarter notes should be in each measure. Again using the 9/12 time 
+        # signature example, this would give us 9/3 = 3, which is correct. Finally, we 
+        # modularly divide the length of all the notes in this line of music by that 
+        # number to confirm that each measure is indeed the correct length. Because we 
+        # perform this calculation at each measure, all the measures will have the 
+        # correct length.
+        if total_notes_length % (self.ts_numerator / (self.ts_denominator / 4.0)) == 0:
+            return True
         else:
+            # return False
             raise ValueError(f"Number of notes per measure must match time signature.")
+
 
     #######################################
     # Ideas for expansion:

@@ -9,7 +9,7 @@ class MusicInterpreter:
         self.streamer = stream.Stream()
         self.parts = []
 
-    def interpret(self, ast):
+    def interpret(self, ast, execute=True):
         self.ensemble_song = ast
 
         self.streamer.insert(0, tempo.MetronomeMark(number=self.ensemble_song['Tempo']))
@@ -33,5 +33,6 @@ class MusicInterpreter:
             for n in self.streamer.recurse().notes:
                 n.transpose(self.ensemble_song['Transpose'], inPlace=True)
         
-        print(f"Now playing {self.ensemble_song['Title']} ...")
-        self.streamer.show("midi")
+        if execute:
+            print(f"Now playing {self.ensemble_song['Title']} ...")
+            self.streamer.show("midi")
